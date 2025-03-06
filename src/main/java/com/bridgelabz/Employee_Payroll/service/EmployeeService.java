@@ -31,7 +31,7 @@ public class EmployeeService {
 
     public Employee updateEmployee(Long id, Employeedto employeedto) {
        Optional<Employee> existingEmployee = Optional.ofNullable(repository.findById(id).orElse(null));
-        if (existingEmployee != null) {
+        if (existingEmployee.isPresent()) {
             Employee employee =existingEmployee.get();
             employee.setName(employee.getName());
             employee.setEmail(employee.getEmail());
@@ -39,11 +39,12 @@ public class EmployeeService {
             return repository.save(employee);
         }
         else {
-            throw new RuntimeException("Employee not found");
+            throw new RuntimeException("Employee not found ");
         }
     }
 
     public void deleteEmployee(Long id) {
         repository.deleteById(id);
     }
+
 }
