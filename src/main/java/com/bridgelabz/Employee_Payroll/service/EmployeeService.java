@@ -23,7 +23,7 @@ public class EmployeeService {
     public Employee getEmployeeById(Long id) {
         return repository.findById(id).orElse(null);
     }
-
+//  creating employee
     public Employee addEmployee(Employeedto employeedto) {
         Employee employee = new Employee(employeedto);
         return repository.save(employee);
