@@ -1,5 +1,6 @@
 package com.bridgelabz.Employee_Payroll.model;
 
+import com.bridgelabz.Employee_Payroll.dto.Employeedto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,5 +17,10 @@ public class Employee {
     private String name;
     private String email;
     private double salary;
+    public Employee(Employeedto employeeDTO) {
+        this.name = employeeDTO.getName();
+        this.salary = employeeDTO.getSalary();
+    }
+
 }
 

@@ -1,5 +1,6 @@
 package com.bridgelabz.Employee_Payroll.controller;
 
+import com.bridgelabz.Employee_Payroll.dto.Employeedto;
 import com.bridgelabz.Employee_Payroll.model.Employee;
 import com.bridgelabz.Employee_Payroll.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,13 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee addEmployee(@RequestBody Employee employee) {
-        return service.addEmployee(employee);
+    public Employee addEmployee(@RequestBody Employeedto employeedto) {
+        return service.addEmployee(employeedto);
     }
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
-        return service.updateEmployee(id, employee);
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employeedto employeedto) {
+        return service.updateEmployee(id, employeedto);
     }
 
     @DeleteMapping("/{id}")

@@ -3,10 +3,12 @@ package com.bridgelabz.Employee_Payroll.service;
 
 
 import com.bridgelabz.Employee_Payroll.model.Employee;
+import com.bridgelabz.Employee_Payroll.dto.Employeedto;
 import com.bridgelabz.Employee_Payroll.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -22,19 +24,23 @@ public class EmployeeService {
         return repository.findById(id).orElse(null);
     }
 
-    public Employee addEmployee(Employee employee) {
+    public Employee addEmployee(Employeedto employeedto) {
+        Employee employee = new Employee(employeedto);
         return repository.save(employee);
     }
 
-    public Employee updateEmployee(Long id, Employee employee) {
-        Employee existingEmployee = repository.findById(id).orElse(null);
+    public Employee updateEmployee(Long id, Employeedto employeedto) {
+       Optional<Employee> existingEmployee = Optional.ofNullable(repository.findById(id).orElse(null));
         if (existingEmployee != null) {
-            existingEmployee.setName(employee.getName());
-            existingEmployee.setEmail(employee.getEmail());
-            existingEmployee.setSalary(employee.getSalary());
-            return repository.save(existingEmployee);
+            Employee employee =existingEmployee.get();
+            employee.setName(employee.getName());
+            employee.setEmail(employee.getEmail());
+            employee.setSalary(employee.getSalary());
+            return repository.save(employee);
         }
-        return null;
+        else {
+            throw new RuntimeException("Employee not found");
+        }
     }
 
     public void deleteEmployee(Long id) {
