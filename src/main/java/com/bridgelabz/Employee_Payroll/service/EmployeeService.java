@@ -1,7 +1,10 @@
 package com.bridgelabz.Employee_Payroll.service;
 
+
+
 import com.bridgelabz.Employee_Payroll.model.Employee;
 import com.bridgelabz.Employee_Payroll.dto.Employeedto;
+import lombok.extern.slf4j.Slf4j;
 import com.bridgelabz.Employee_Payroll.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+@Slf4j
 @Service
 public class EmployeeService {
 
@@ -49,6 +52,14 @@ public class EmployeeService {
     public void deleteEmployee(Long id) {
         repository.deleteById(id);
     }
+    public void addPayrollRecord(Employee record) {
+        payrollData.add(record);
+        log.info("Added Payroll Record: {}", record);
+    }
 
+    public List<Employee> getAllPayrollRecords() {
+        log.info("Fetching all payroll records. Total: {}", payrollData.size());
+        return new ArrayList<>(payrollData);
+    }
 
 }
