@@ -1,20 +1,23 @@
 package com.bridgelabz.Employee_Payroll.service;
 
-
-
 import com.bridgelabz.Employee_Payroll.model.Employee;
 import com.bridgelabz.Employee_Payroll.dto.Employeedto;
 import com.bridgelabz.Employee_Payroll.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class EmployeeService {
 
     @Autowired
     private EmployeeRepository repository;
+
+    private final List<Employee> payrollData = new ArrayList<>();
 
     public List<Employee> getAllEmployees() {
         return repository.findAll();
@@ -23,7 +26,7 @@ public class EmployeeService {
     public Employee getEmployeeById(Long id) {
         return repository.findById(id).orElse(null);
     }
-//  creating employee
+
     public Employee addEmployee(Employeedto employeedto) {
         Employee employee = new Employee(employeedto);
         return repository.save(employee);
@@ -46,5 +49,6 @@ public class EmployeeService {
     public void deleteEmployee(Long id) {
         repository.deleteById(id);
     }
+
 
 }
