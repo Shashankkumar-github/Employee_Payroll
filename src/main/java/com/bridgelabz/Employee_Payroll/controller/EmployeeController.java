@@ -43,6 +43,7 @@ public class EmployeeController {
         service.deleteEmployee(id);
         return "Employee deleted succesfully";
     }
+//    Logeer
     @PostMapping("/payroll/add")
     public String addPayroll(@RequestBody Employee record) {
         service.addPayrollRecord(record);
