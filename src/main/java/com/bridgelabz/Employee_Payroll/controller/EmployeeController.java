@@ -3,6 +3,7 @@ package com.bridgelabz.Employee_Payroll.controller;
 import com.bridgelabz.Employee_Payroll.dto.Employeedto;
 import com.bridgelabz.Employee_Payroll.model.Employee;
 import com.bridgelabz.Employee_Payroll.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -29,12 +30,12 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee addEmployee(@RequestBody Employeedto employeedto) {
+    public Employee addEmployee(@Valid @RequestBody Employeedto employeedto) {
         return service.addEmployee(employeedto);
     }
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employeedto employeedto) {
+    public Employee updateEmployee(@PathVariable Long id,@Valid @RequestBody Employeedto employeedto) {
         return service.updateEmployee(id, employeedto);
     }
 
